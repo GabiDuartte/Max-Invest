@@ -1,2 +1,2 @@
 # Max-Invest
- A Django Project
+Um projeto Django
