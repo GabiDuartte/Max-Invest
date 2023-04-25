@@ -2,22 +2,38 @@ from django.db import models
 
 # Create your models here.
 
-class Investidor(models.Model):
-    data = models.DateTimeField("Data")
-    cod_ativo = models.CharField(max_length=200)
-    quantidade = models.IntegerField(default=0)
-    vlr_unitario = models.FloatField(default=0)
-    corretagem = models.FloatField(default=0)
+class Investimento(models.Model):
+    id = models.IntegerField(default=0)
+    code = models.CharField(max_length=200)
+    date = models.DateField('date published')
+    amount = models.DecimalField(max_digits=5,decimal_places=0)
+    value = models.DecimalField(max_digits=15,default=0)
+    brokerage = models.DecimalField(default=0)
 
     def __str__(self):
-        return self.cod_ativo
+        return self.id
 
-class Calculados(models.Model):
-    qtd_acoes = models.ManyToManyField(Investidor, verbose_name='Quantidade de Ações')
+    class Meta:
+        verbose_name = u'Investimento'
+        verbose_name_plural = u'INVESTIMENTOS'
+        acao = ['-data']
 
-    @property
-    def valor_operacao():
-        qtd_acoes = self.qtd_acoes.all()
-        vlr_tot = 0.00
-        for qtd_acao in qtd_acoes:
-            vlr_tot += qtd_acao.vlr_unitario
+class Calculo(models.Model):
+    taxab3 = models.ManyToManyField(Investimento, verbose_name='Tarifa de Ações')
+    amount = models.DecimalField(max_digits=5,decimal_places=0)
+    valor = models.DecimalField(max_digits=15,decimal_places=2)
+    subtotal = models.DecimalField(max_digits=10,decimal_places=2,editable=False)
+    dt_invest = models.DateTimeField('Data do Investimento',auto_now_add=True)
+    invest = models.ForeignKey(Investimento, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = u'Calculo'
+        verbose_name_plural = u'Calculos'
+
+    # taxa = 0,0325%
+    def save(self,*args,**kwargs):
+        self.subtotal = self.valor * self.amount
+        self.invest.value += self.subtotal
+        self.taxab3.values = (self.subtotal * 0.0325)/100 + self.subtotal
+        
+        return super(Calculo, self).save(*args, **kwargs)
