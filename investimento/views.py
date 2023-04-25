@@ -8,7 +8,6 @@ class HomeView(generic.HomeView):
         return render(requests, 'investimento/index.html')
 
 class CalcTot(generic.CalcTot):
-
     def total(request,id=None):
         context = {}
         context['total'] = Calculo.objects.get(id=id)
