@@ -1,0 +1,26 @@
+{% extends "style.html" %}
+
+{% block page_content %}
+<h1 class="text-center my-5 py-3">Max-Invest</h1>
+
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+        <div class="card text-center">
+            <div class="card-header">
+                <h3>Login</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="text-end" style="display: grid;">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit" value="Entrar" class="btn btn-primary">
+                    <hr/>
+                    <input type="submit" value="Registrar" class="btn btn-secondary">
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
