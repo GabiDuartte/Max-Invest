@@ -2,9 +2,17 @@ from django.db import models
 
 # Create your models here.
 
-class Investor(models.Model):
-    nome = models.CharField(max_length=200)
-    #login, perfis(conservador, moderado, arrojado)
+ class Investor(models.Model):
+    Perfil_Risco = (
+        ("1", "Conservador"),
+        ("2", "Moderado"),
+        ("3", "Arrojado")
+    )
+    perfil = models.CharField(max_length=20, choices=Perfil_Risco, blank=False, null=False)
+    #login
+
+    def __str__(self):
+        return self.perfil
 
 class Stock(models.Model):
     cod_ativo = models.CharField(max_length=6)
@@ -12,9 +20,9 @@ class Stock(models.Model):
     cnpj = models.CharField(max_length=200)
     quantidade = models.DecimalField(max_digits=15, decimal_places=0)
     valor_total = models.DecimalField(max_digits=15, decimal_places=2)
-
+    
     def __str__(self):
-        return self.nome
+       return self.nome
 
 class Transaction(models.Model):
     ESCOLHA = (
