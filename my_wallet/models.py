@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 # Create your models here.
 
@@ -32,19 +33,13 @@ class Transaction(models.Model):
 
     data = models.DateTimeField('Data', auto_now_add=True)
     stock = models.ManyToOneRel(Stock, on_delete=models.CASCADE)
-    quantidade = models.IntegerField(default=0)
-    preço = models.DecimalField(max_digits=15, decimal_places=2)
+    quantidade = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    preço = models.DecimalField(max_digits=15, decimal_places=2, validators=[MinValueValidator(0)])
     tipo = models.CharField(max_length=1, choices=ESCOLHA, blank=False, null=False)
-    corretagem = models.DecimalField(max_digits=8,default=0)
+    corretagem = models.DecimalField(max_digits=8,validators=[MinValueValidator(0)])
     investor = models.ManyToOneRel(Investor, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.tipo
-
-    def positivo(n):
-        if n > 0:
-            print(n)
-        else:
-            print('Erro')
     
 
