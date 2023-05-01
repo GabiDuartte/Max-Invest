@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Pagina Inicial</h1>
+{% extends 'dashboard.html' %} 
 
-</body>
-</html>
+{% block content %} 
+    <h1>Lista de Operações</h1>
+    <ul>
+        {% for operacao in operacoes %} 
+            <li>{{operacao.data|date:"d/m/y H:i:s"}} - {{ operacao.usuario }} 
+                realizou a operação {{ operacao.tipo }} no objeto {{ operacao.investor }}</li>
+        {% endfor %}
+    </ul>
+    <a href="dashboard.html">Pagina Inicial</a>
+{% endblock %}
