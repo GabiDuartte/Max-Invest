@@ -1,12 +1,1 @@
-{% extends 'dashboard.html' %} 
 
-{% block content %} 
-    <h1>Lista de Operações</h1>
-    <ul>
-        {% for operacao in operacoes %} 
-            <li>{{operacao.data|date:"d/m/y H:i:s"}} - {{ operacao.usuario }} 
-                realizou a operação {{ operacao.tipo }} no objeto {{ operacao.investor }}</li>
-        {% endfor %}
-    </ul>
-    <a href="dashboard.html">Pagina Inicial</a>
-{% endblock %}
