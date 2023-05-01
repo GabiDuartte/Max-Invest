@@ -18,6 +18,10 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Transaction
     template_name = 'my_wallet/transaction.html'
+    
+        def listar(request):
+        operacoes = Transaction.objects.order_by('data')
+        return render(request, 'transactions.html', {'operacoes': operacoes})
 
 
 
