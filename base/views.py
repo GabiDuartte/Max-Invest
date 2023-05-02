@@ -60,8 +60,8 @@ class InvestCreate(LoginRequiredMixin, CreateView):
         return super(InvestCreate, self).form_valid(form)
     
 class DetailView(LoginRequiredMixin, DetailView):
-    model = Transaction
-    template_name = 'investimento_detail.html'
+    model = Investment
+    template_name = 'investiment_detail.html'
 
     def get_queryset(self):
         return Transaction.objects.filter(
