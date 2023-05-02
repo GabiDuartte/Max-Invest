@@ -1,3 +1,3 @@
 # Max-Invest
-Um projeto Django
+Um projeto Django <br>
 Integrantes: Gabriel Oliveira Rodrigues e Gabriela Duarte Albornoz
