@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 
 from django.urls import reverse_lazy
@@ -57,6 +58,15 @@ class InvestCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(InvestCreate, self).form_valid(form)
+    
+class DetailView(LoginRequiredMixin, DetailView):
+    model = Transaction
+    template_name = 'investimento_detail.html'
+
+    def get_queryset(self):
+        return Transaction.objects.filter(
+            data__ltde = timezone.now()
+        )
 
 class InvestUpdate(LoginRequiredMixin, UpdateView):
     model = Investment
