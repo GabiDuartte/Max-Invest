@@ -24,11 +24,17 @@ class Stock(models.Model):
        return self.nome
 
 class Investment(models.Model):
+     choices = (
+        ("C", "Compra"),
+        ("V", "Venda")
+    )
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     code = models.CharField(verbose_name='Código',max_length=200)
     stock = models.ManyToOneRel(Stock, on_delete=models.CASCADE)
     investor = models.ManyToOneRel(Investor, on_delete=models.CASCADE)
     date = models.DateField(verbose_name='Data de Investimento')
+    type = models.CharField(verbose_name='Tipo',max_length=1, choices=choices, default='C', null=False)
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0,validators=[MinValueValidator(0)])
     amount = models.IntegerField(verbose_name='Quantidade',default=0,validators=[MinValueValidator(0)])
     brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0,validators=[MinValueValidator(0)])
@@ -41,3 +47,15 @@ class Investment(models.Model):
 
     class Meta:
         ordering = ['date']
+        
+    def valor_total(self):
+        return self.amount * self.value 
+    
+    def taxas_totais(self):
+        return self.taxab3 + self.brokerage 
+    
+    def valor_final(self):
+        if self.type == 'C':
+            return (self.amount * self.value)  + (self.taxab3 + self.brokerage)
+        if self.type == 'V':
+            return (self.amount * self.value) - (self.taxab3 + self.brokerage)
