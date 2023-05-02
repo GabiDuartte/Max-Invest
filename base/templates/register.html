@@ -7,17 +7,17 @@
         <div class="col-md-auto">
             <div class="card text-center">
                 <div class="card-header">
-                    <h2>Login</h2>
+                    <h2>Registrar</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST" class="text-end" style="display: grid;">
+                    <form method="POST" class="text-start" style="display: grid;">
                         {% csrf_token %}
                         {{form.as_p}}
                         <hr/>
-                        <input type="submit" value="Entrar" class="btn btn-primary">
+                        <input type="submit" value="Registrar" class="btn btn-primary">
                     </form>
                     <hr/>
-                    <p>Ainda não tem uma Conta? <a href="{% url 'register' %}">Registre-se</a>!</p>
+                    <p>Já tem uma Conta? <a href="{% url 'login' %}">Faça o Login</a>!</p>
                 </div>
             </div>
         </div>

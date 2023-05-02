@@ -1,0 +1,88 @@
+{% extends "style.html" %}
+
+{% block page_content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary"">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">MaxInvest</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{request.user}}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                    </ul>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                </li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<h1 class="text-center m-5">Meus Investimentos</h1>
+
+<div class="d-flex justify-content-center m-4 pb-4">
+    <a href="{% url 'invest-create' %}">
+        <button class="btn btn-primary">Adicionar</button>
+    </a>
+</div>
+
+<div class="px-5">
+    <div class="d-flex justify-content-evenly m-0">
+        <form method="GET">
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Investimento..." type="text" name="search-area">
+                <input class="btn btn-secondary" type="submit" value="Buscar">
+            </div>
+        </form>
+    </div>
+    <table class="table table-hover table-bordered ">
+        <thead class="table-secondary">
+            <tr>
+                <th>Código</th>
+                <th>Data de Investimento</th>
+                <th>Valor Unitário</th>
+                <th>Quantidade</th>
+                <th>Corretagem</th>
+                <th>Taxa B3</th>
+                <th>- - -</th>
+                <th>- - -</th>
+                <th>- - -</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in investments %}
+            <tr>
+                <td>{{item.code}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.value}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.brokerage}}</td>
+                <td>{{item.taxab3}}</td>
+                <td><button class="btn btn-secondary">Ver</button></td>
+                <td>
+                    <a href="{% url 'invest-update' item.id %}">
+                        <button class="btn btn-info">Editar</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'invest-delete' item.id %}">
+                        <button class="btn btn-danger">Remover</button>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <h3 class="border border-warning rounded-1 text-center m-3">
+                Você ainda não possui investimentos!
+            </h3>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
