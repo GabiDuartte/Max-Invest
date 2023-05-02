@@ -6,6 +6,16 @@ from . models import Investor, Stock, Transaction
 
 class HomeView(generic.ListView):
     template_name = 'my_wallet/dashboard.html'
+    
+    def criar_transacao(request):
+        if request.method == 'POST':
+            form = Transaction(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('')
+            else:
+                form = Transaction()
+        return render(request, 'dashboard.html', {'form': form})
 
 class DetailView(generic.DetailView):
     model = Transaction
