@@ -7,8 +7,22 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{% url  %}" method="post">
-   
+    {% extends dashboard.html %} 
+
+{% block content %} 
+    <h1>Detalhes Transação</h1>
+    <p>Data: {{transacao.data}}</p>
+    <p>Quantidade: {{transacao.quantidade}}</p>
+    <p>Preço Unitário: {{transacao.preço}}</p>
+    <p>Total: {{transacao.stock}}</p>
+    <form method="post">
+        {% csrf_token %} 
+        {{form.as_p}} 
+        <button type="submit">Atualizar</button>
+        <button type="submit" name="excluir">Excluir</button>
     </form>
+    <a href="dashboard.html">Voltar para Página Inicial</a>
+
+{% endblock %}
 </body>
 </html>
