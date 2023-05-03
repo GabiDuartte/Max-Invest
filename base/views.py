@@ -65,7 +65,7 @@ class DetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return Transaction.objects.filter(
-            data__ltde = timezone.now()
+            data__lte = timezone.now()
         )
 
 class InvestUpdate(LoginRequiredMixin, UpdateView):
