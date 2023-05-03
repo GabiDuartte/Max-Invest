@@ -25,6 +25,7 @@
     </div>
 </nav>
 
+<<<<<<< Updated upstream
 <h1 class="text-center m-5">Meus Investimentos</h1>
 
 
@@ -37,10 +38,22 @@
             </div>
         </form>
     </div>
+=======
+<h1 class="text-center mt-5">Investimento {{investment}}</h1>
+
+<div class="d-flex justify-content-center m-4">
+    <a href="{% url 'investments' %}">
+        <button class="btn btn-secondary">Voltar</button>
+    </a>
+</div>
+
+<div class="d-flex justify-content-center pt-0 p-5">
+>>>>>>> Stashed changes
     <table class="table table-hover table-bordered ">
         <thead class="table-secondary">
             <tr>
                 <th>Código</th>
+<<<<<<< Updated upstream
                 <th>Data de Investimento</th>
                 <th>Valor Unitário</th>
                 <th>Quantidade</th>
@@ -69,8 +82,37 @@
                         <button class="btn btn-danger">Remover</button>
                     </a>
                 </td>
+=======
+                <th>Data</th>
+                <th>Valor Unitário</th>
+                <th>Quant</th>
+                <th>Valor Total</th>
+                <th>Corretagem</th>
+                <th>Taxa B3</th>
+                <th>Taxas Totais</th>
+                <th>Tipo</th>
+                <th>Total Final</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{investment.code}}</td>
+                <td>{{investment.date}}</td>
+                <td>R${{investment.value}}</td>
+                <td>{{investment.amount}}</td>
+                <td>R${{investment.total_value}}</td>
+                <td>R${{investment.brokerage}}</td>
+                <td>R${{investment.taxab3}}</td>
+                <td>R${{investment.total_taxas}}</td>
+                <td>{{investment.type}}</td>
+                <td>R${{investment.total_final}}</td>
+>>>>>>> Stashed changes
             </tr>
         </tbody>
     </table>
 </div>
+<<<<<<< Updated upstream
 {% endblock %}
+=======
+{% endblock %}
+>>>>>>> Stashed changes

@@ -49,10 +49,15 @@ class InvestList(LoginRequiredMixin, ListView):
         if search_input:
             context['investments'] = context['investments'].filter(code__icontains=search_input)
         return context
+    
+class InvestDetail(LoginRequiredMixin, DetailView):
+    model = Investment
+    context_object_name = 'investment'
+
 
 class InvestCreate(LoginRequiredMixin, CreateView):
     model = Investment
-    fields = ['code', 'date', 'value', 'amount', 'brokerage', 'taxab3']
+    fields = ['code', 'date', 'value', 'amount', 'brokerage', 'type']
     success_url = reverse_lazy('investments')
 
     def form_valid(self, form):
@@ -70,7 +75,7 @@ class DetailView(LoginRequiredMixin, DetailView):
 
 class InvestUpdate(LoginRequiredMixin, UpdateView):
     model = Investment
-    fields = ['code', 'date', 'value', 'amount', 'brokerage', 'taxab3']
+    fields = ['code', 'date', 'value', 'amount', 'brokerage', 'type']
     success_url = reverse_lazy('investments')
 
 class InvestDelete(LoginRequiredMixin, DeleteView):

@@ -46,11 +46,12 @@
         <thead class="table-secondary">
             <tr>
                 <th>Código</th>
-                <th>Data de Investimento</th>
+                <th>Data</th>
                 <th>Valor Unitário</th>
-                <th>Quantidade</th>
+                <th>Quant</th>
                 <th>Corretagem</th>
                 <th>Taxa B3</th>
+                <th>Tipo</th>
                 <th>- - -</th>
                 <th>- - -</th>
                 <th>- - -</th>
@@ -61,11 +62,16 @@
             <tr>
                 <td>{{item.code}}</td>
                 <td>{{item.date}}</td>
-                <td>{{item.value}}</td>
+                <td>R${{item.value}}</td>
                 <td>{{item.amount}}</td>
-                <td>{{item.brokerage}}</td>
-                <td>{{item.taxab3}}</td>
-                <td><button class="btn btn-secondary">Ver</button></td>
+                <td>R${{item.brokerage}}</td>
+                <td>R${{item.taxab3}}</td>
+                <td>{{item.type}}</td>
+                <td>
+                    <a href="{% url 'invest' item.id %}">
+                        <button class="btn btn-secondary">Ver</button>
+                    </a>
+                </td>
                 <td>
                     <a href="{% url 'invest-update' item.id %}">
                         <button class="btn btn-info">Editar</button>
