@@ -31,8 +31,8 @@ class Investment(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     code = models.CharField(verbose_name='Código',max_length=200)
-    stock = models.ManyToOneRel(Stock, on_delete=models.CASCADE)
-    investor = models.ManyToOneRel(Investor, on_delete=models.CASCADE)
+    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    investor = models.ForeignKey(Investor, on_delete=models.CASCADE)
     date = models.DateField(verbose_name='Data de Investimento')
     type = models.CharField(verbose_name='Tipo',max_length=1, choices=choices, default='C', null=False)
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0,validators=[MinValueValidator(0)])
