@@ -64,14 +64,7 @@ class InvestCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(InvestCreate, self).form_valid(form)
     
-class DetailView(LoginRequiredMixin, DetailView):
-    model = Investment
-    template_name = 'investiment_detail.html'
 
-    def get_queryset(self):
-        return Transaction.objects.filter(
-            data__lte = timezone.now()
-        )
 
 class InvestUpdate(LoginRequiredMixin, UpdateView):
     model = Investment
