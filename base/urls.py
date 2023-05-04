@@ -9,7 +9,6 @@ urlpatterns = [
     path('', InvestList.as_view(), name='investments'),
     path('invest/<int:pk>/', InvestDetail.as_view(), name='invest'),
     path('invest-create/', InvestCreate.as_view(), name='invest-create'),
-    path('invest-detail/<int:pk>/', DetailView.as_view(), name='invest-detail'),
     path('invest-update/<int:pk>/', InvestUpdate.as_view(), name='invest-update'),
     path('invest-delete/<int:pk>/', InvestDelete.as_view(), name='invest-delete'),
 ]
