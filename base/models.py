@@ -82,14 +82,4 @@ class Investment(models.Model):
     class Meta:
         ordering = ['date']
         
-    def valor_total(self):
-        return self.amount * self.value 
-    
-    def taxas_totais(self):
-        return self.taxab3 + self.brokerage 
-    
-    def valor_final(self):
-        if self.type == 'C':
-            return (self.amount * self.value)  + (self.taxab3 + self.brokerage)
-        if self.type == 'V':
-            return (self.amount * self.value) - (self.taxab3 + self.brokerage)
+  
