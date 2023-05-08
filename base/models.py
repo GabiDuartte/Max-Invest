@@ -31,10 +31,6 @@ class Stock(models.Model):
 
 class Investment(models.Model):
 <<<<<<< Updated upstream
-     choices = (
-        ("C", "Compra"),
-        ("V", "Venda")
-    )
     
 =======
     choice = (
@@ -48,16 +44,11 @@ class Investment(models.Model):
     investor = models.ForeignKey(Investor, on_delete=models.CASCADE)
     date = models.DateField(verbose_name='Data de Investimento')
 <<<<<<< Updated upstream
+=======
     type = models.CharField(verbose_name='Tipo',max_length=1, choices=choices, default='C', null=False)
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0,validators=[MinValueValidator(0)])
     amount = models.IntegerField(verbose_name='Quantidade',default=0,validators=[MinValueValidator(0)])
     brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0,validators=[MinValueValidator(0)])
-    taxab3 = models.DecimalField(verbose_name='Taxa B3',max_digits=5,decimal_places=2,default=0)
-=======
-    value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0)
-    amount = models.IntegerField(verbose_name='Quantidade',default=0)
-    brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0)
-    type = models.CharField(verbose_name='Tipo',max_length=1, choices=choice, default='C', null=False)
 >>>>>>> Stashed changes
 
     def __str__(self):
