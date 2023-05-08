@@ -63,6 +63,11 @@ class InvestCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(InvestCreate, self).form_valid(form)
+        
+    def get_queryset(self):
+        return Investment.objects.filter(
+            data__lte = timezone.now()
+        )
     
 
 
