@@ -45,7 +45,7 @@ class Investment(models.Model):
     date = models.DateField(verbose_name='Data de Investimento')
 <<<<<<< Updated upstream
 =======
-    type = models.CharField(verbose_name='Tipo',max_length=1, choices=choices, default='C', null=False)
+    type = models.CharField(verbose_name='Tipo',max_length=1, choices=choice, default='C', null=False)
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0,validators=[MinValueValidator(0)])
     amount = models.IntegerField(verbose_name='Quantidade',default=0,validators=[MinValueValidator(0)])
     brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0,validators=[MinValueValidator(0)])
