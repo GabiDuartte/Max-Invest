@@ -25,7 +25,7 @@
     </div>
 </nav>
 
-<<<<<<< Updated upstream
+
 <h1 class="text-center m-5">Meus Investimentos</h1>
 
 
@@ -38,7 +38,7 @@
             </div>
         </form>
     </div>
-=======
+
 <h1 class="text-center mt-5">Investimento {{investment}}</h1>
 
 <div class="d-flex justify-content-center m-4">
@@ -48,41 +48,10 @@
 </div>
 
 <div class="d-flex justify-content-center pt-0 p-5">
->>>>>>> Stashed changes
     <table class="table table-hover table-bordered ">
         <thead class="table-secondary">
             <tr>
                 <th>Código</th>
-<<<<<<< Updated upstream
-                <th>Data de Investimento</th>
-                <th>Valor Unitário</th>
-                <th>Quantidade</th>
-                <th>Corretagem</th>
-                <th>Taxa B3</th>
-                <th>- - -</th>
-                <th>- - -</th>
-                <th>- - -</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in investments %}
-            <tr>
-                <td>{{item.code}}</td>
-                <td>{{item.date}}</td>
-                <td>{{item.value}}</td>
-                <td>{{item.amount}}</td>
-                <td>{{item.brokerage}}</td>
-                <td>{{item.taxab3}}</td>
-                    <a href="{% url 'invest-update' item.id %}">
-                        <button class="btn btn-info">Editar</button>
-                    </a>
-                </td>
-                <td>
-                    <a href="{% url 'invest-delete' item.id %}">
-                        <button class="btn btn-danger">Remover</button>
-                    </a>
-                </td>
-=======
                 <th>Data</th>
                 <th>Valor Unitário</th>
                 <th>Quant</th>
@@ -106,13 +75,9 @@
                 <td>R${{investment.total_taxas}}</td>
                 <td>{{investment.type}}</td>
                 <td>R${{investment.total_final}}</td>
->>>>>>> Stashed changes
             </tr>
         </tbody>
     </table>
 </div>
-<<<<<<< Updated upstream
+
 {% endblock %}
-=======
-{% endblock %}
->>>>>>> Stashed changes

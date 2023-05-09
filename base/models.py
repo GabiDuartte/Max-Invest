@@ -1,12 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-<<<<<<< Updated upstream
 from django.core.validators import MinValueValidator
-=======
-from django import forms
+
 from decimal import Decimal
 
->>>>>>> Stashed changes
 # Create your models here.
 
 class Investor(models.Model):
@@ -15,41 +12,34 @@ class Investor(models.Model):
         ("2", "Moderado"),
         ("3", "Arrojado")
     )
-    perfil = models.CharField(max_length=20, choices=Perfil_Risco, default='1', null=False)
+    perfil = models.CharField(max_length=20, choices=Perfil_Risco, default="1", null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.perfil
 
-class Stock(models.Model):
+'''class Stock(models.Model):
     cod_ativo = models.CharField(max_length=6)
     nome = models.CharField(max_length=200)
     cnpj = models.CharField(max_length=20)
     
     def __str__(self):
-       return self.nome
+       return self.nome'''
 
 class Investment(models.Model):
-<<<<<<< Updated upstream
-    
-=======
     choice = (
         ('C', 'Compra'),
         ('V', 'Venda')
     )
->>>>>>> Stashed changes
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     code = models.CharField(verbose_name='Código',max_length=200)
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    investor = models.ForeignKey(Investor, on_delete=models.CASCADE)
+    #stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
     date = models.DateField(verbose_name='Data de Investimento')
-<<<<<<< Updated upstream
-=======
     type = models.CharField(verbose_name='Tipo',max_length=1, choices=choice, default='C', null=False)
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0,validators=[MinValueValidator(0)])
     amount = models.IntegerField(verbose_name='Quantidade',default=0,validators=[MinValueValidator(0)])
     brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0,validators=[MinValueValidator(0)])
->>>>>>> Stashed changes
 
     def __str__(self):
         return self.code
