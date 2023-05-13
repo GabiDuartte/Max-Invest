@@ -1,14 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-<<<<<<< Updated upstream
-from django.core.validators import MinValueValidator
-=======
-from django import forms
 from decimal import Decimal
 
->>>>>>> Stashed changes
 # Create your models here.
-
+'''
 class Investor(models.Model):
     Perfil_Risco = (
         ("1", "Conservador"),
@@ -20,45 +15,30 @@ class Investor(models.Model):
 
     def __str__(self):
         return self.perfil
+'''
 
 class Stock(models.Model):
-    cod_ativo = models.CharField(max_length=6)
-    nome = models.CharField(max_length=200)
-    cnpj = models.CharField(max_length=20)
+    stock = models.CharField(max_length=10, db_column='stock')
+    name = models.CharField(max_length=200, db_column='name')
+    market_cap = models.CharField(max_length=20, db_column='market_cap', null=True)
     
     def __str__(self):
-       return self.nome
+       return self.stock
 
 class Investment(models.Model):
-<<<<<<< Updated upstream
-     choices = (
+    type_options = (
         ("C", "Compra"),
         ("V", "Venda")
     )
-    
-=======
-    choice = (
-        ('C', 'Compra'),
-        ('V', 'Venda')
-    )
->>>>>>> Stashed changes
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    code = models.CharField(verbose_name='Código',max_length=200)
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    investor = models.ForeignKey(Investor, on_delete=models.CASCADE)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    stock = models.ForeignKey(Stock, on_delete=models.CASCADE, null=False)
+    code = models.CharField(verbose_name='Código', max_length=25, null=False, blank=True)
     date = models.DateField(verbose_name='Data de Investimento')
-<<<<<<< Updated upstream
-    type = models.CharField(verbose_name='Tipo',max_length=1, choices=choices, default='C', null=False)
-    value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0,validators=[MinValueValidator(0)])
-    amount = models.IntegerField(verbose_name='Quantidade',default=0,validators=[MinValueValidator(0)])
-    brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0,validators=[MinValueValidator(0)])
-    taxab3 = models.DecimalField(verbose_name='Taxa B3',max_digits=5,decimal_places=2,default=0)
-=======
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0)
     amount = models.IntegerField(verbose_name='Quantidade',default=0)
     brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0)
-    type = models.CharField(verbose_name='Tipo',max_length=1, choices=choice, default='C', null=False)
->>>>>>> Stashed changes
+    type = models.CharField(verbose_name='Tipo', max_length=1, choices=type_options, null=False, blank=True)
 
     def __str__(self):
         return self.code
@@ -81,5 +61,3 @@ class Investment(models.Model):
 
     class Meta:
         ordering = ['date']
-        
-  
