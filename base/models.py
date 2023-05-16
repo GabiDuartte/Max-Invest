@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 from decimal import Decimal
 
 # Create your models here.
-'''
-class Investor(models.Model):
+"""class Investor(models.Model):
     Perfil_Risco = (
         ("1", "Conservador"),
         ("2", "Moderado"),
@@ -14,8 +13,8 @@ class Investor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.perfil
-'''
+        return self.perfil"""
+
 
 class Stock(models.Model):
     stock = models.CharField(max_length=10, db_column='stock')
@@ -26,7 +25,7 @@ class Stock(models.Model):
        return self.stock
 
 class Investment(models.Model):
-    type_options = (
+    investment_type_options = (
         ("C", "Compra"),
         ("V", "Venda")
     )
@@ -38,7 +37,7 @@ class Investment(models.Model):
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0)
     amount = models.IntegerField(verbose_name='Quantidade',default=0)
     brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0)
-    type = models.CharField(verbose_name='Tipo', max_length=1, choices=type_options, null=False, blank=True)
+    type = models.CharField(verbose_name='Tipo', max_length=1, choices=investment_type_options, null=False, blank=True)
 
     def __str__(self):
         return self.code

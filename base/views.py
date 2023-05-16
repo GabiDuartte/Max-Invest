@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django import forms
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -16,7 +16,6 @@ from django.forms import widgets
 from django.utils import timezone
 
 import requests
-'''from .forms import UserCreationForm'''
 from .models import Investment,Stock
 
 class Login(LoginView):
@@ -44,7 +43,7 @@ class Register(FormView):
             return redirect('investments')
         return super(Register, self).get(*args, **kwargs)
     
- """ def create_user(request):
+    def create_user(request):
         if request.method == 'POST':
             form = UserCreationForm(request.post)
             if form.is_valid():
@@ -55,7 +54,7 @@ class Register(FormView):
             else:
                 form = UserCreationForm()
             return render(request, 'register.html', {'form': form})
-"""
+
     
 
 class StocksList(LoginRequiredMixin, ListView):
