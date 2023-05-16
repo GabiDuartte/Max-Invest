@@ -16,6 +16,7 @@ from django.forms import widgets
 from django.utils import timezone
 
 import requests
+'''from .forms import UserCreationForm'''
 from .models import Investment,Stock
 
 class Login(LoginView):
@@ -42,7 +43,20 @@ class Register(FormView):
         if self.request.user.is_authenticated:
             return redirect('investments')
         return super(Register, self).get(*args, **kwargs)
-
+    
+ """ def create_user(request):
+        if request.method == 'POST':
+            form = UserCreationForm(request.post)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.perfil = form.cleaned_data['Role']
+                user.save()
+                return redirect('home')
+            else:
+                form = UserCreationForm()
+            return render(request, 'register.html', {'form': form})
+"""
+    
 
 class StocksList(LoginRequiredMixin, ListView):
     model = Stock
