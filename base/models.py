@@ -1,7 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
+from django.contrib.auth.models import AbstractUser
 
+<<<<<<< HEAD
+
+class Investor(models.Model):
+    Perfil = [
+         ("1", "Conservador"),
+         ("2", "Moderado"),
+         ("3", "Arrojado")
+    ]
+           
+    perfil = models.CharField(max_length=3, default="1", choices=Perfil)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+    
+=======
 # Create your models here.
 """class Investor(models.Model):
     Perfil_Risco = (
@@ -14,6 +29,7 @@ from decimal import Decimal
 
     def __str__(self):
         return self.perfil"""
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 
 
 class Stock(models.Model):
@@ -25,7 +41,11 @@ class Stock(models.Model):
        return self.stock
 
 class Investment(models.Model):
+<<<<<<< HEAD
+    type_options = (
+=======
     investment_type_options = (
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
         ("C", "Compra"),
         ("V", "Venda")
     )
@@ -37,7 +57,11 @@ class Investment(models.Model):
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0)
     amount = models.IntegerField(verbose_name='Quantidade',default=0)
     brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0)
+<<<<<<< HEAD
+    type = models.CharField(verbose_name='Tipo', max_length=1, choices=type_options, null=False, blank=True)
+=======
     type = models.CharField(verbose_name='Tipo', max_length=1, choices=investment_type_options, null=False, blank=True)
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 
     def __str__(self):
         return self.code
@@ -57,6 +81,15 @@ class Investment(models.Model):
             return round(((self.value * self.amount) + (self.brokerage + ((self.value * self.amount) * Decimal(0.0325)))), 2)
         if self.type == 'V':
             return round(((self.value * self.amount) - (self.brokerage + ((self.value * self.amount) * Decimal(0.0325)))), 2)
+        
+    def preco_medio(self):
+        cont = 0
+        pm = 0
+        pm = ((cont*pm)+ self.total_final())/(cont + self.amount)
+
+    def lucro_prejuizo(self):
+        if self.type == 'V':
+            return round(self.total_final() - (self.amount * self.preco_medio()), 2)
 
     class Meta:
         ordering = ['date']

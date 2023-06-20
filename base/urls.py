@@ -12,4 +12,8 @@ urlpatterns = [
     path('invest-create/', InvestCreate.as_view(), name='invest-create'),
     path('invest-update/<int:pk>/', InvestUpdate.as_view(), name='invest-update'),
     path('invest-delete/<int:pk>/', InvestDelete.as_view(), name='invest-delete'),
+    path('investor-data/', Register.getData1, name='investor-data'),
+    path('add-perfil/', Register.addPerfil, name='add-perfil'),
+    path('stocks-data/', StocksList.getData, name='stocks_data'),
+    path('add-stock/', StocksList.addStock, name='add_stock')
 ]
