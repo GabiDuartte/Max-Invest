@@ -1,12 +1,18 @@
 {% extends "style.html" %}
 
 {% block page_content %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary"">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">MaxInvest</a>
-      <div class="collapse navbar-collapse">
+    <a class="navbar-brand" href="{% url 'investments' %}">MaxInvest</a>
+    <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
             {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'investments' %}">Meus Investimentos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'stocks_list' %}">Ações da Bolsa</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{request.user}}
@@ -21,25 +27,11 @@
                 </li>
             {% endif %}
         </ul>
-      </div>
+    </div>
     </div>
 </nav>
 
-<<<<<<< Updated upstream
-<h1 class="text-center m-5">Meus Investimentos</h1>
-
-
-<div class="px-5">
-    <div class="d-flex justify-content-evenly m-0">
-        <form method="GET">
-            <div class="input-group mb-3">
-                <input class="form-control" placeholder="Investimento..." type="text" name="search-area">
-                <input class="btn btn-secondary" type="submit" value="Buscar">
-            </div>
-        </form>
-    </div>
-=======
-<h1 class="text-center mt-5">Investimento {{investment}}</h1>
+<h1 class="text-center mt-5">Investimento {{investment.stock}}</h1>
 
 <div class="d-flex justify-content-center m-4">
     <a href="{% url 'investments' %}">
@@ -48,41 +40,10 @@
 </div>
 
 <div class="d-flex justify-content-center pt-0 p-5">
->>>>>>> Stashed changes
     <table class="table table-hover table-bordered ">
         <thead class="table-secondary">
             <tr>
                 <th>Código</th>
-<<<<<<< Updated upstream
-                <th>Data de Investimento</th>
-                <th>Valor Unitário</th>
-                <th>Quantidade</th>
-                <th>Corretagem</th>
-                <th>Taxa B3</th>
-                <th>- - -</th>
-                <th>- - -</th>
-                <th>- - -</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in investments %}
-            <tr>
-                <td>{{item.code}}</td>
-                <td>{{item.date}}</td>
-                <td>{{item.value}}</td>
-                <td>{{item.amount}}</td>
-                <td>{{item.brokerage}}</td>
-                <td>{{item.taxab3}}</td>
-                    <a href="{% url 'invest-update' item.id %}">
-                        <button class="btn btn-info">Editar</button>
-                    </a>
-                </td>
-                <td>
-                    <a href="{% url 'invest-delete' item.id %}">
-                        <button class="btn btn-danger">Remover</button>
-                    </a>
-                </td>
-=======
                 <th>Data</th>
                 <th>Valor Unitário</th>
                 <th>Quant</th>
@@ -96,7 +57,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{investment.code}}</td>
+                <td>{{investment.stock}}</td>
                 <td>{{investment.date}}</td>
                 <td>R${{investment.value}}</td>
                 <td>{{investment.amount}}</td>
@@ -106,13 +67,8 @@
                 <td>R${{investment.total_taxas}}</td>
                 <td>{{investment.type}}</td>
                 <td>R${{investment.total_final}}</td>
->>>>>>> Stashed changes
             </tr>
         </tbody>
     </table>
 </div>
-<<<<<<< Updated upstream
 {% endblock %}
-=======
-{% endblock %}
->>>>>>> Stashed changes

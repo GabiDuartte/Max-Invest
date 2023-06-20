@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from decimal import Decimal
 from django.contrib.auth.models import AbstractUser
 
+<<<<<<< HEAD
 
 class Investor(models.Model):
     Perfil = [
@@ -15,6 +16,20 @@ class Investor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     
+=======
+# Create your models here.
+"""class Investor(models.Model):
+    Perfil_Risco = (
+        ("1", "Conservador"),
+        ("2", "Moderado"),
+        ("3", "Arrojado")
+    )
+    perfil = models.CharField(max_length=20, choices=Perfil_Risco, default='1', null=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.perfil"""
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 
 
 class Stock(models.Model):
@@ -26,7 +41,11 @@ class Stock(models.Model):
        return self.stock
 
 class Investment(models.Model):
+<<<<<<< HEAD
     type_options = (
+=======
+    investment_type_options = (
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
         ("C", "Compra"),
         ("V", "Venda")
     )
@@ -38,7 +57,11 @@ class Investment(models.Model):
     value = models.DecimalField(verbose_name='Valor Unitário',max_digits=15,decimal_places=2,default=0)
     amount = models.IntegerField(verbose_name='Quantidade',default=0)
     brokerage = models.DecimalField(verbose_name='Corretagem',max_digits=5,decimal_places=2,default=0)
+<<<<<<< HEAD
     type = models.CharField(verbose_name='Tipo', max_length=1, choices=type_options, null=False, blank=True)
+=======
+    type = models.CharField(verbose_name='Tipo', max_length=1, choices=investment_type_options, null=False, blank=True)
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 
     def __str__(self):
         return self.code

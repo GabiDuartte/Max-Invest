@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render
 from django import forms
+<<<<<<< HEAD
 from django.contrib.auth import get_user_model
+=======
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
@@ -15,6 +18,7 @@ from django.contrib.auth import login
 from django.core.paginator import Paginator
 from django.forms import widgets
 from django.utils import timezone
+<<<<<<< HEAD
 import requests
 '''from .forms import UserCreationForm'''
 from .models import Investment,Stock, Investor
@@ -24,6 +28,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 User = get_user_model()
+=======
+
+import requests
+from .models import Investment,Stock
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 
 class Login(LoginView):
     template_name = 'login.html'
@@ -53,7 +62,11 @@ class Register(FormView):
     
     def create_user(request):
         if request.method == 'POST':
+<<<<<<< HEAD
             form = UserCreationForm(request.POST)
+=======
+            form = UserCreationForm(request.post)
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
             if form.is_valid():
                 user = form.save(commit=False)
                 user.perfil = form.cleaned_data['Role']
@@ -61,6 +74,7 @@ class Register(FormView):
                 return redirect('home')
             else:
                 form = UserCreationForm()
+<<<<<<< HEAD
         return render(request, 'register.html', {'form': form})
 
     @staticmethod  
@@ -78,6 +92,11 @@ class Register(FormView):
             serializer.save()
         return Response(serializer.data)
 
+=======
+            return render(request, 'register.html', {'form': form})
+
+    
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 
 class StocksList(LoginRequiredMixin, ListView):
     model = Stock
@@ -93,6 +112,7 @@ class StocksList(LoginRequiredMixin, ListView):
         queryset = Stock.objects.filter(stock__in=[s['stock'] for s in available_stocks])
         return queryset.order_by('stock')
 
+<<<<<<< HEAD
     @staticmethod
     @api_view(['GET'])
     def getData(request):
@@ -107,6 +127,9 @@ class StocksList(LoginRequiredMixin, ListView):
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data)
+=======
+
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 
 class InvestList(LoginRequiredMixin, ListView):
     model = Investment
@@ -158,7 +181,10 @@ class InvestCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(InvestCreate, self).form_valid(form)
+<<<<<<< HEAD
         
+=======
+>>>>>>> ce8105a2c2caf77c6b45a38385f45c431e81e277
 
 class InvestUpdate(LoginRequiredMixin, UpdateView):
     model = Investment
