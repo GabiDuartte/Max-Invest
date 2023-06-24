@@ -82,14 +82,20 @@ class Investment(models.Model):
         if self.type == 'V':
             return round(((self.value * self.amount) - (self.brokerage + ((self.value * self.amount) * Decimal(0.0325)))), 2)
         
+  '''
     def preco_medio(self):
-        cont = 0
-        pm = 0
-        pm = ((cont*pm)+ self.total_final())/(cont + self.amount)
+            cont = Investment.objects.filter(stock=self.stock, type='C').count()  # 
+            pm = Investment.objects.filter(stock=self.stock, type='C').aggregate(Sum('total_final'))['total_final__sum']  
+            pm = pm / cont if cont != 0 else 0 
+            return round(pm, 2)
 
-    def lucro_prejuizo(self):
-        if self.type == 'V':
-            return round(self.total_final() - (self.amount * self.preco_medio()), 2)
+
+        def lucro_prejuizo(self):
+            if self.type == 'V':
+                return round(self.total_final() - (self.amount * self.preco_medio()), 2)
+
+   '''     
+   
 
     class Meta:
         ordering = ['date']
